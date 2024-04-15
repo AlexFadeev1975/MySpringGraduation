@@ -1,6 +1,6 @@
 package org.example.repository;
 
-import org.example.model.Hotel;
+import org.example.data.model.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

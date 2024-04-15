@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -87,6 +89,15 @@ public class ExceptionAdvice {
         ExceptionResponse response = new ExceptionResponse("Неверный формат данных");
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IOException.class)
+    @ResponseStatus(HttpStatus.BAD_GATEWAY)
+    public ResponseEntity<ExceptionResponse> handleIOE(IOException e) {
+
+        ExceptionResponse response = new ExceptionResponse( e.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
     }
 
 }

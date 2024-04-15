@@ -2,8 +2,8 @@ package org.example.search.utils;
 
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
-import org.example.model.City;
-import org.example.model.Hotel;
+import org.example.data.model.City;
+import org.example.data.model.Hotel;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 

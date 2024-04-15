@@ -1,6 +1,6 @@
 package org.example.repository;
 
-import org.example.model.kafka.RegMessage;
+import org.example.data.model.kafka.RegMessage;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 

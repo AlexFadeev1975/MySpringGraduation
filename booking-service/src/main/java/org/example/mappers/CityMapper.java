@@ -1,9 +1,7 @@
 package org.example.mappers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.HotelDtoRequest;
-import org.example.model.City;
-import org.example.model.Hotel;
+import org.example.data.model.City;
 import org.example.services.CityService;
 import org.springframework.stereotype.Component;
 

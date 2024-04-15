@@ -1,8 +1,8 @@
 package org.example.mappers;
 
-import org.example.dto.HotelDtoRequest;
-import org.example.dto.HotelDtoResponse;
-import org.example.model.Hotel;
+import org.example.data.dto.HotelDtoRequest;
+import org.example.data.dto.HotelDtoResponse;
+import org.example.data.model.Hotel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

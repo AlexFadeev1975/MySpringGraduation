@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    password: 123
-    username: User
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    password: ${DB_PASSWORD}
+    username: ${DB_USER}
     driver-class-name: org.postgresql.Driver
 
     hikari:
@@ -24,12 +24,12 @@ spring:
       write_dates_as_timestamps: false
   data:
     mongodb:
-      uri: mongodb://root:root@localhost:27017/mydb?authSource=admin
-      database: mydb
+      uri: ${MONGO_URI}
+      database: ${MONGO_DB}
 
 
   kafka:
-    bootstrap-servers: localhost:9092
-    kafkaMessageGroupId: B-GROUP_ID
-    kafkaBookingMessageTopic: BM_TOPIC
-    kafkaRegMessageTopic: RM_TOPIC
+    bootstrap-servers: ${KAFKA_BS_SERVER}
+    kafkaMessageGroupId: ${KAFKA_MG}
+    kafkaBookingMessageTopic: ${KAFKA_BM_TOPIC}
+    kafkaRegMessageTopic: ${KAFKA_RM_TOPIC}

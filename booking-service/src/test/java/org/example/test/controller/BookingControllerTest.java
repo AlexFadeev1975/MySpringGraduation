@@ -2,11 +2,10 @@ package org.example.test.controller;
 
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
-import org.example.dto.BookingDtoRequest;
-import org.example.model.Room;
-import org.example.model.User;
-import org.example.model.enums.RoleType;
-import org.example.repository.BookingRepository;
+import org.example.data.dto.BookingDtoRequest;
+import org.example.data.model.Room;
+import org.example.data.model.User;
+import org.example.data.model.enums.RoleType;
 import org.example.repository.RoomRepository;
 import org.example.repository.UserRepository;
 import org.junit.jupiter.api.MethodOrderer;

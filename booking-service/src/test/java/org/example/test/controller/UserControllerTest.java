@@ -1,9 +1,9 @@
 package org.example.test.controller;
 
 import io.restassured.http.ContentType;
-import org.example.dto.UserDto;
-import org.example.model.User;
-import org.example.model.enums.RoleType;
+import org.example.data.dto.UserDto;
+import org.example.data.model.User;
+import org.example.data.model.enums.RoleType;
 import org.example.repository.UserRepository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

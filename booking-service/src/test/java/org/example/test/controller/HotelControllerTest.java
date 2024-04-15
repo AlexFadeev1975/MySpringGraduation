@@ -2,11 +2,11 @@ package org.example.test.controller;
 
 import io.restassured.http.ContentType;
 import jakarta.validation.constraints.Negative;
-import org.example.dto.HotelDtoRequest;
-import org.example.model.City;
-import org.example.model.Hotel;
-import org.example.model.User;
-import org.example.model.enums.RoleType;
+import org.example.data.dto.HotelDtoRequest;
+import org.example.data.model.City;
+import org.example.data.model.Hotel;
+import org.example.data.model.User;
+import org.example.data.model.enums.RoleType;
 import org.example.repository.CityRepository;
 import org.example.repository.HotelRepository;
 import org.example.repository.UserRepository;
@@ -208,7 +208,7 @@ public class HotelControllerTest extends AbstractBookingServiceTest {
                 .when()
                 .post(ApiCollection.CREATE_HOTEL)
                 .then()
-                .statusCode(200)
+                .statusCode(400)
                 .body("message", hasToString("[Поле Адрес не может быть пустым]"));
     }
 
@@ -238,7 +238,7 @@ public class HotelControllerTest extends AbstractBookingServiceTest {
                 .when()
                 .put(ApiCollection.UPDATE_HOTEL)
                 .then()
-                .statusCode(200)
+                .statusCode(404)
                 .body("message", hasToString("Отель не найден"));
 
     }
@@ -260,7 +260,7 @@ public class HotelControllerTest extends AbstractBookingServiceTest {
                 .when()
                 .delete(ApiCollection.DELETE_HOTEL)
                 .then()
-                .statusCode(200)
+                .statusCode(404)
                 .body("message", hasToString("Отель не найден"));
 
     }

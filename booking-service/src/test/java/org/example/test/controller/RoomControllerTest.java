@@ -2,12 +2,12 @@ package org.example.test.controller;
 
 import io.restassured.http.ContentType;
 import jakarta.validation.constraints.Negative;
-import org.example.dto.RoomDtoRequest;
-import org.example.model.City;
-import org.example.model.Hotel;
-import org.example.model.Room;
-import org.example.model.User;
-import org.example.model.enums.RoleType;
+import org.example.data.dto.RoomDtoRequest;
+import org.example.data.model.City;
+import org.example.data.model.Hotel;
+import org.example.data.model.Room;
+import org.example.data.model.User;
+import org.example.data.model.enums.RoleType;
 import org.example.repository.HotelRepository;
 import org.example.repository.RoomRepository;
 import org.example.repository.UserRepository;

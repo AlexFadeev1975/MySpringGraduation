@@ -1,14 +1,12 @@
 package org.example.security;
 
 import lombok.RequiredArgsConstructor;
-import org.example.model.User;
+import org.example.data.model.User;
 import org.example.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor

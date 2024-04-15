@@ -5,49 +5,48 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.example.statics.StaticData.target;
 
 
 @Component
 public class CsvParser {
 
-    public List<CSVRecord> readFileFromUrl(String link) throws IOException {
+    public List<CSVRecord> readFileFromUrl(String link) {
 
-        URL url = new URL(link);
+        List<CSVRecord> list = new ArrayList<>();
 
-        CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase();
+        try {
+            URL url = new URL(link);
 
-        CSVParser parser = CSVParser.parse(url, StandardCharsets.UTF_8, csvFormat);
+            CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase();
 
-        List<CSVRecord> list = parser.getRecords();
+            CSVParser parser = CSVParser.parse(url, StandardCharsets.UTF_8, csvFormat);
 
-        parser.close();
+            list = parser.getRecords();
+
+            parser.close();
+
+        } catch (IOException e) {
+
+            System.out.println("Файл " + e.getMessage() + " недоступен");
+        }
 
         return list;
 
     }
 
-    public List<CSVRecord> readFileFromPath(String path) throws IOException {
-
-        Reader reader = Files.newBufferedReader(Paths.get(path));
-
-        CSVParser parser = CSVParser.parse(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withRecordSeparator(",,"));
-
-        return parser.getRecords();
-    }
-
     public List<String> getCities(String path) throws IOException {
 
-        File file = new File(String.valueOf(Paths.get(target + path)));
+        File file = new File(String.valueOf(Paths.get(path)));
         FileReader rdr = new FileReader(file, Charset.forName("windows-1251"));
 
         BufferedReader reader = new BufferedReader(rdr);

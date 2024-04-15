@@ -68,7 +68,7 @@ services:
       JAVA_TOOL_OPTIONS: -Xmx512m
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: EXTERNAL://localhost:9092,INTERNAL://kafka:9192
+      KAFKA_ADVERTISED_LISTENERS: EXTERNAL://kafka:9092,INTERNAL://kafka:9192
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LOG_RETENTION_HOURS: 1
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: EXTERNAL:PLAINTEXT,INTERNAL:PLAINTEXT
@@ -78,8 +78,8 @@ services:
     depends_on:
       - zookeeper
 
-  booking:
-    image: 'news-service'
+  booking-service:
+    image: 'booking-service'
     ports:
       - '8080:8080'
     expose:
@@ -87,15 +87,24 @@ services:
     environment:
       DB_HOST: pgsql
       DB_PORT: 5432
-      DB_NAME: User
+      DB_NAME: postgres
       DB_PASSWORD: 123
       DB_USER: User
+      MONGO_URI: mongodb://root:root@mongodb:27017/mydb?authSource=admin
+      MONGO_DB: mydb
+      KAFKA_BS_SERVER: kafka:9092
+      KAFKA_MG: B-GROUP_ID
+      KAFKA_BM_TOPIC: BM_TOPIC
+      KAFKA_RM_TOPIC: RM_TOPIC
 
     depends_on:
       - pgsql
+      - mongodb
+      - kafka
 
     networks:
       - server
+      - internal-network
 networks:
   server:
     driver: bridge

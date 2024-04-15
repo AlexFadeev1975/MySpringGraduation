@@ -1,12 +1,9 @@
 package org.example.mappers;
 
-import org.example.dto.BookingDtoResponse;
-import org.example.model.Booking;
-import org.example.model.Room;
-import org.example.model.User;
+import org.example.data.dto.BookingDtoResponse;
+import org.example.data.model.Booking;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 

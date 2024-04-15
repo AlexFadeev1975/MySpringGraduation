@@ -2,23 +2,21 @@ package org.example.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.dto.HotelDtoRequest;
-import org.example.dto.HotelDtoResponse;
+import org.example.data.dto.HotelDtoRequest;
+import org.example.data.dto.HotelDtoResponse;
 import org.example.exceptions.SuchItemExistException;
 import org.example.mappers.HotelMapper;
-import org.example.model.City;
-import org.example.model.Hotel;
+import org.example.data.model.City;
+import org.example.data.model.Hotel;
 import org.example.repository.HotelRepository;
 import org.example.search.filters.HotelFilterBuilder;
 import org.example.search.utils.Filter;
 import org.example.search.utils.SpecificationBuilder;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -28,13 +26,9 @@ import java.util.NoSuchElementException;
 public class HotelService {
 
     private final HotelRepository hotelRepository;
-
     private final HotelMapper mapper;
-
     private final HotelFilterBuilder hotelFilterBuilder;
-
     private final SpecificationBuilder<Hotel> specificationBuilder;
-
     private final CityService cityService;
 
     public HotelDtoResponse findHotelById(Long id) {
@@ -59,13 +53,11 @@ public class HotelService {
 
     public HotelDtoResponse updateHotel(HotelDtoRequest request) {
 
-
         Hotel hotel = hotelRepository.findById(request.getId()).orElseThrow(() -> new NoSuchElementException("Отель не найден"));
 
         if (request.getCity() != null && request.getDistrict() != null) {
             City city = cityService.searchCity(request.getCity(), request.getDistrict());
             hotel.setCity(city);
-            ;
         }
         if (request.getHeader() != null) {
             hotel.setHeader(request.getHeader());
@@ -108,20 +100,14 @@ public class HotelService {
             return hotelRepository.findAll(specification, pageable).getContent().stream().map(mapper::mapHotelToDto).toList();
     }
 
-    public HotelDtoResponse changeHotelRating(HotelDtoRequest dto) throws ParseException {
+    public HotelDtoResponse changeHotelRating(HotelDtoRequest dto) {
 
         Hotel hotel = hotelRepository.findById(dto.getId()).orElseThrow(() -> new NoSuchElementException("Отель не найден"));
-
         Float rating = (hotel.getRating() == null) ? dto.getMark() : hotel.getRating();
-
         Integer numberOfRating = (hotel.getRatesCount() == null) ? 1 : hotel.getRatesCount();
-
         Float totalRating = rating * numberOfRating;
-
         totalRating = totalRating - rating + dto.getMark();
-
         rating = totalRating / numberOfRating;
-
         numberOfRating = numberOfRating + 1;
 
         hotel.setRating(rating);
